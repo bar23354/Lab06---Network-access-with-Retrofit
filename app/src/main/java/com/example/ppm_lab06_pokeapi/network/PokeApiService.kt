@@ -18,4 +18,3 @@ object RetrofitClient {
 
     val apiService: PokeApiService = retrofit.create(PokeApiService::class.java)
 }
-

@@ -1,6 +1,5 @@
 package com.example.ppm_lab06_pokeapi
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,8 +16,6 @@ import com.example.ppm_lab06_pokeapi.network.Pokemon
 import com.example.ppm_lab06_pokeapi.network.RetrofitClient
 import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.launch
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun RFirst100(navController: NavController) {
@@ -37,13 +34,13 @@ fun RFirst100(navController: NavController) {
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(pokemonList) { pokemon ->
+            val pokemonId = pokemon.url.split("/").dropLast(1).last()
             PokemonRow(pokemon = pokemon, onClick = {
-                navController.navigate("MSpriteScreen/${pokemon.name}")
+                navController.navigate("MSpriteScreen/${pokemon.name}/$pokemonId")
             })
         }
     }
 }
-
 
 @Composable
 fun PokemonRow(pokemon: Pokemon, onClick: () -> Unit) {
@@ -56,9 +53,10 @@ fun PokemonRow(pokemon: Pokemon, onClick: () -> Unit) {
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.placeholder_pokemon),
-            contentDescription = "Placeholder",
+        GlideImage(
+            imageModel = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonId.png",
+            placeHolder = painterResource(id = R.drawable.placeholder_pokemon),
+            error = painterResource(id = R.drawable.placeholder_pokemon), //manejo de errores
             contentScale = ContentScale.Crop,
             modifier = Modifier.size(64.dp)
         )
@@ -67,18 +65,3 @@ fun PokemonRow(pokemon: Pokemon, onClick: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewRFirst100() {
-    val dummyPokemonList = listOf(
-        Pokemon(name = "bulbasaur", url = "https://pokeapi.co/api/v2/pokemon/1/"),
-        Pokemon(name = "ivysaur", url = "https://pokeapi.co/api/v2/pokemon/2/"),
-        Pokemon(name = "venusaur", url = "https://pokeapi.co/api/v2/pokemon/3/")
-    )
-
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(dummyPokemonList) { pokemon ->
-            PokemonRow(pokemon = pokemon, onClick = {})
-        }
-    }
-}

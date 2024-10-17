@@ -25,3 +25,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun PreviewMainActivity() {
+    val navController = rememberNavController()
+    NavGraph(navController = navController)
+}

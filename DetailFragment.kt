@@ -46,9 +46,8 @@ fun Detail(pokemon: Pokemon, modifier: Modifier = Modifier) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 16.dp)) {
             Spacer(modifier = Modifier.width(10.dp))
 
-
             GlideImage(
-                imageModel = pokemon.imageUrlFront,
+                imageModel = pokemon.imageUrlFront, //de clase Pokemon, url para imagen del frente del pokemón
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(128.dp)
             )
@@ -56,7 +55,7 @@ fun Detail(pokemon: Pokemon, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(150.dp))
 
             GlideImage(
-                imageModel = pokemon.imageUrlBack,
+                imageModel = pokemon.imageUrlBack, //de clase Pokemon, url para imagen de la parte trasera del pokemón
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(128.dp)
             )
@@ -82,7 +81,7 @@ fun Detail(pokemon: Pokemon, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(10.dp))
 
             GlideImage(
-                imageModel = pokemon.imageUrlShinnyFront,
+                imageModel = pokemon.imageUrlShinnyFront, //de clase Pokemon, url para imagen del frente shiny del pokemón
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(128.dp)
             )
@@ -90,7 +89,7 @@ fun Detail(pokemon: Pokemon, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(150.dp))
 
             GlideImage(
-                imageModel = pokemon.imageUrlShinyBack,
+                imageModel = pokemon.imageUrlShinyBack, //de clase Pokemon, url para imagen de la parte trasera shiny del pokemón
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(128.dp)
             )

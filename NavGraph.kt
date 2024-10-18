@@ -22,29 +22,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.ppm_lab06_pokeapi.network.Pokemon
 
-//@Composable
-//fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
-//    NavHost(navController = navController, startDestination = "RFirst100") {
-//        composable("RFirst100") {
-//            RFirst100(navController = navController)
-//        }
-//        composable("DetailFragment/{pokemonName}/{pokemonId}") { backStackEntry ->
-//            val pokemonName = backStackEntry.arguments?.getString("pokemonName") ?: ""
-//            val pokemonId = backStackEntry.arguments?.getString("pokemonId") ?: "0"
-//            val poke = Pokemon(name = pokemonName, url = "", id = pokemonId.toInt())
-//
-//            Detail(pokemon = poke)
-//        }
-//    }
-//}
-
 @Composable
 fun NavGraph(navController: NavHostController = rememberNavController(), modifier: Modifier = Modifier) {
     // Get current back stack entry
     val backStackEntry by navController.currentBackStackEntryAsState()
     // Get the name of the current screen
     val currentScreen = backStackEntry?.destination?.route ?: "RFirst100"
-
+    //Cambia títulos de AppBar
     val title = when (currentScreen) {
         "RFirst100" -> "MainFragment"
         "DetailFragment/{pokemonName}/{pokemonId}" -> "DetailFragment"
@@ -56,19 +40,19 @@ fun NavGraph(navController: NavHostController = rememberNavController(), modifie
         topBar = {
             AppBar(
                 title = title,
-                navController.previousBackStackEntry != null,
+                navController.previousBackStackEntry != null, //regresa a página principal
                 navigateUp = { navController.navigateUp() }
             )
         }
     ){ innerPadding ->
         NavHost(navController = navController, startDestination = "RFirst100", modifier = modifier.padding(innerPadding)) {
             composable("RFirst100") {
-                RFirst100(navController = navController)
+                RFirst100(navController = navController) //comienza en listado pokemones
             }
             composable("DetailFragment/{pokemonName}/{pokemonId}") { backStackEntry ->
-                val pokemonName = backStackEntry.arguments?.getString("pokemonName") ?: ""
-                val pokemonId = backStackEntry.arguments?.getString("pokemonId") ?: "0"
-                val poke = Pokemon(name = pokemonName, url = "", id = pokemonId.toInt())
+                val pokemonName = backStackEntry.arguments?.getString("pokemonName") ?: "" //dependiendo del nombre del pokemon
+                val pokemonId = backStackEntry.arguments?.getString("pokemonId") ?: "0"//dependiendo del ID del pokemon
+                val poke = Pokemon(name = pokemonName, url = "", id = pokemonId.toInt()) //pasa parámetro del nombre, url (front, back, etc) y su ID
 
                 Detail(pokemon = poke)
             }

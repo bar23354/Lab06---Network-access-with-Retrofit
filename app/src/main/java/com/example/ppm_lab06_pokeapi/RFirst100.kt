@@ -56,7 +56,7 @@ fun PokemonRow(pokemon: Pokemon, onClick: () -> Unit) {
         GlideImage(
             imageModel = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonId.png",
             placeHolder = painterResource(id = R.drawable.placeholder_pokemon),
-            error = painterResource(id = R.drawable.placeholder_pokemon), //manejo de errores
+            error = painterResource(id = R.drawable.placeholder_pokemon),
             contentScale = ContentScale.Crop,
             modifier = Modifier.size(64.dp)
         )
